@@ -1,17 +1,18 @@
 # ./Makefile
 #
-# Main Makefile for project.
+# Main Makefile for backend project.
 
-include makefiles/dev_ops.mk makefiles/lint_test.mk
+include makefiles/dev_ops.mk 
 
 SHELL = /bin/bash
 
 .DEFAULT_GOAL := all
-.PHONY: all
-all:
-	set -e; \
-	make lint; \
-	make test; \
-	make build; \
-	make run
+
+.PHONY: all local cloud
+
+cloud: deploy_gcloud
+
+local: run_local
+
+all: local cloud
 
